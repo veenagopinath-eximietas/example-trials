@@ -1,0 +1,14 @@
+module pd(
+input clk,
+input rst_n,
+input din,
+output logic dout);
+
+logic din_reg;
+
+always_ff @(posedge clk or negedge rst_n)
+  if(~rst_n) din_reg <= 1'b0;
+  else din_reg <= din;
+
+  assign dout = (din & (!(din_reg)));
+endmodule
